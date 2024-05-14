@@ -249,4 +249,18 @@ static으로 선언해야 한다.
 테스트 이후에 특정 데이터를 삭제해야 하는 경우 사용
 static이 아니어야 한다.
 
+■ AssertJ로 검증문 가독성 높이기
+isEqualTo(A): A값과 같은지 검증
+isNotEqualTo(A): A값과 다른지 검증
+contains(A): A값을 포함하는지 검증
+doesNotContain(A): A값을 포함하지 않는지 검증
+startsWith(A): 접두사가 A인지 검증
+endsWith(A): 접미사가 A인지 검증
+isEmpty(): 비어 있는 값인지 검증
+isNotEmpty(): 비어 있지 않은 값인지 검증
+isPositive(): 양수인지 검증
+isNegative(): 음수인지 검증
+isGreaterThan(1): 1보다 큰 값인지 검증
+isLessThan(1): 1보다 작은 값인지 검증
+
 ======================================
