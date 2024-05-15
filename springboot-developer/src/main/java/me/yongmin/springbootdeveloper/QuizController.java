@@ -23,7 +23,7 @@ public class QuizController {
             case 1:
                 return ResponseEntity.status(403).body("Forbidden!");
             default:
-                return ResponseEntity.ok().body("OK");
+                return ResponseEntity.ok().body("OK!");
         }
     }
 }

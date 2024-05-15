@@ -7,12 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -66,5 +68,40 @@ public class QuizControllerTest {
         result
                 .andExpect(status().isBadRequest() )
                 .andExpectAll(content().string("Bad Request!") );
+    }
+
+    @DisplayName("quiz(): POST /quiz?code=1 이면 응답 코드는 403, 응답 본문은 Forbidden!를 리턴한다.")
+    @Test
+    public void postQuiz1() throws Exception {
+        // given
+        final String url = "/quiz";
+
+        // wehn
+        final ResultActions result = mockMvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new Code(1) ) )
+        );
+        // than
+        result
+                .andExpect(status().isForbidden())
+                .andExpect(content().string("Forbidden!"));
+    }
+
+    @DisplayName("quiz(): POST /quiz?code=13 이면 응답 코드는 200, 응답 본문은 OK!를 리턴한다.")
+    @Test
+    public void postQuiz13() throws Exception {
+        // given
+        final String url = "/quiz";
+
+        // wehn
+        final ResultActions result = mockMvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new Code(13) ) )
+        );
+
+        // than
+        result
+                .andExpect(status().isOk())
+                .andExpect(content().string("OK!"));
     }
 }
