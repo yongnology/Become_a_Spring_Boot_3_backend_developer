@@ -421,4 +421,7 @@ POST/articles/1
 PUT/articles/1
 DELETE/articles/1
 
+6.2 블로그 개발을 위한 엔티티 구성하기
+
+
 ======================================
